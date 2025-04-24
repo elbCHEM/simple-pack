@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "simple"
+version = "0.0.1"
+authors = [
+  { name="ELB", email="elb@chem.ku.dk" },
+]
+maintainers = [
+  {name="ELB", email="elb@chem.ku.dk" },
+]
+description = "This pack is a simple learning tool to learn how to build a Python package"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 2 - Pre-Alpha",
+]
+license = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/elbCHEM/simple-pack"
+Issues = "https://github.com/elbCHEM/simple-pack/issues"
