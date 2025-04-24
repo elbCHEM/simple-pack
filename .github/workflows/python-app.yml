@@ -33,7 +33,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
           pip install flake8 pytest mypy
-          pip intall pyproject.toml
+          pip install pyproject.toml
           pip install .  # Install the package such that imports works
           
       - name: Lint with flake8
