@@ -15,7 +15,6 @@ class MaximumQuestionsAnswerWrong(Exception):
         super().__init__(*args)
 
 
-INTEGER_PATTERN = re.compile(r"^([+,-]?\d+)$")
 _MAXIMUM_NUMBER_OF_QUESTIONS_ASKED = 100
 
 
@@ -49,12 +48,35 @@ def get_integer_from_user_input(max_questions: int = _MAXIMUM_NUMBER_OF_QUESTION
         if not (user_input := raw_user_input.strip()):
             print("Cannot interpret whitespace - Please try again")
             continue
-        if not (__match := INTEGER_PATTERN.match(user_input)):
+
+        try:
+            return int(user_input)
+        except ValueError:
             print(f"Cound not interpret {user_input} as an integer - Please try again")
+
+
+    raise MaximumQuestionsAnswerWrong(f"Stopped after {n} questions answered wrong",
+                                      question_asked=n
+                                      )
+
+
+def get_floating_point_from_user_input(max_questions: int = _MAXIMUM_NUMBER_OF_QUESTIONS_ASKED) -> Optional[int]:
+    max_questions = min(max_questions, _MAXIMUM_NUMBER_OF_QUESTIONS_ASKED)
+
+    for n in range(1, max_questions+1):
+        raw_user_input = input("Please enter a floating-point number: ")
+
+        if not raw_user_input:
+            return None
+        if not (user_input := raw_user_input.strip()):
+            print("Cannot interpret whitespace - Please try again")
+            continue
+        try:
+            return float(user_input)
+        except ValueError:
+            print(f"Cound not interpret {user_input} as a floating point number - Please try again")
             continue
 
-        return int(__match.group(1))
-
-    raise MaximumQuestionsAnswerWrong(f"Stopped after {n} questions answered wrong", 
+    raise MaximumQuestionsAnswerWrong(f"Stopped after {n} questions answered wrong",
                                       question_asked=n
                                       )
