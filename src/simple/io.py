@@ -2,7 +2,6 @@
 Very simple io.
 """
 import os
-import re
 from typing import LiteralString, Optional
 
 
@@ -54,13 +53,23 @@ def get_integer_from_user_input(max_questions: int = _MAXIMUM_NUMBER_OF_QUESTION
         except ValueError:
             print(f"Cound not interpret {user_input} as an integer - Please try again")
 
-
     raise MaximumQuestionsAnswerWrong(f"Stopped after {n} questions answered wrong",
-                                      question_asked=n
+                                      question_asked=n,
                                       )
 
 
-def get_floating_point_from_user_input(max_questions: int = _MAXIMUM_NUMBER_OF_QUESTIONS_ASKED) -> Optional[int]:
+def get_floating_point_from_user_input(max_questions: int = _MAXIMUM_NUMBER_OF_QUESTIONS_ASKED) -> Optional[float]:
+    """Asks the user for a floating point number.
+
+    Args:
+        max_questions (int, optional): Maximum number of wrong answers. Defaults to MAXIMUM_NUMBER_OF_QUESTIONS_ASKED.
+
+    Raises:
+        MaximumQuestionsAnswerWrong: If the user does not provide a valid answer too many times.
+
+    Returns:
+        Optional[float]: Floating point number that was provided by the user. None is no answer was provided.
+    """
     max_questions = min(max_questions, _MAXIMUM_NUMBER_OF_QUESTIONS_ASKED)
 
     for n in range(1, max_questions+1):
